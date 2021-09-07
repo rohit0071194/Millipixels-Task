@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React,{useState,useCallback} from 'react'
+import "./App.css"
+const App = () => {
 
-function App() {
+  const [diceNumber, setDiceNumber] = useState(1)
+  
+  const handleClick = useCallback((min,max) => {
+    let diceValue = Math.floor(Math.random() * (max - min)) + min;
+    setDiceNumber(diceValue)
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Dice Game in ReactJS</h1>
+      <div className="dice-block">
+        {diceNumber}
+      </div>
+      <button className="btn-style" onClick={() => handleClick(1,7)}>Roll Button</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
